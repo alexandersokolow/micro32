@@ -1,19 +1,18 @@
 # micro32
 This is a simulation of a 32-bit van-neumann-architecture microprocessor, as conceptualized in micro32.png
 
-It has 16 registers, where register 0 is always 0 and register 1 is always 1.
+It has 64 registers, where register 0 is always 0, register 1 is always 1 and register 2 is always -1 (in two's complement).  
+Only the first 16 will be printed during the programs execution, but you can easily modify the code to print all of them, by changing the maximal value for i in the for-loop of the printStatus-method.
 
-The memory consists of 2^32 adresses, 2^12 of which can be utilized for binary instructions.
-
-The whole memory (meaning, also the binary instructions) can be self-modified by the instructions themself.  
-To modify the memory, one must load an adr from the alu into the MAR (MEMMODE 01) and in the next step load data from the alu
-into the adr specified in the MAR (MEMMODE 10).  
-One can also load data from the memory into the A-IN of the alu by using MEMMODE 11, which will set the A-MUX to 1 and load the
-data from the adr specified in the MAR.
+The memory consists of 2^16 addresses, which can be utilized for and modified by binary instructions.  
+This can be done, by filling the MBR (memory-buffer-register) and MAR (memory-address-register) and then using the appropriate command (look below) to save the data from the MBR to the MAR-address or conversely load the data from the MAR-address to the MBR.  
+Later on I will also add physical i.e. non-volatile memory to it.
 
 4 different operations for the alu and additionally a shift of the result by one to the left or right can be chosen.
 
-A jumpadr can be also specified, to which the counter will jump, if the alu-out satisfies the specified jumping-condition.
+Also, a counter-buffer can be loaded and conditional or nonconditional jumps utilized to set the counter i.e. jump to the address specified in the counter-buffer.
+
+The current MBR-content can be saved by setting the AMUX, the current address of the counter itself by setting the BMUX.
 
 To run a program, one must create a file called "bootloader" which may consist only of 32-bit-codes, meaning every line shall 
 contain exactly 32 characters of either 0 or 1.  
@@ -21,17 +20,19 @@ you can also add empty lines (without any trailing space characters) or comments
 The bits specified in those 32 characters have the following effects (order from left to right) ..  
 2 bit: ALU (arithmetic operation)  
 2 bit: SHIFT (left/right shift operation)  
-2 bit: MEMMODE (memory mode)  
-2 bit: JUMP (jumping condition)  
-4 bit: A-SEL (selector for which register shall be loaded into A-IN of alu)  
-4 bit: B-SEL (selector for which register shall be loaded into B-IN of alu)  
-4 bit: S-SEL (selector for which register (other than 0 or 1) shall get the output from the alu)  
-12 bit: JUMPADR (the adr, to which the counter shall jump, if the jumping condition is fulfilled)  
-Look into the micro32.png for more details concerning the operations  
+3 bit: JUMP (jumping condition)  
+3 bit: MEMMODE (memory mode)  
+1 bit: SLOAD (load alu-result to reg\[S-SEL\])  
+1 bit: CLOAD (load alu-result to counter-buffer)  
+1 bit: AMUX (activate amux)  
+1 bit: BMUX (activate bmux)  
+6 bit: A-SEL (selector for which register shall be loaded into A-IN of alu)  
+6 bit: B-SEL (selector for which register shall be loaded into B-IN of alu)  
+6 bit: S-SEL (selector for which register (other than 0, 1 or 2) shall get the output from the alu)  
   
-The bootloader-file in the repository contains an example-program, that initializes reg2=4, reg3=3 and then uses a multiplication
-subroutine to multiply them.  
+The bootloader-file in the repository contains an example-program, that initializes reg3=8, reg4=6 and then uses a multiplication
+subroutine to multiply them. You can also initialize it with different numbers and it will still work! 
 
-If the counter reaches 2^12-1, the program will stop, meaning you can jump to this adress to stop your program.
+if the command 0 is used, the program will exit.
 
 ![micro32conceptual](micro32.png)
