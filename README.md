@@ -31,3 +31,5 @@ Look into the micro32.png for more details concerning the operations
 An example-program of multiplication will be provided soon.
 
 If the counter reaches 2^12-1, the program will stop, meaning you can jump to this adress to stop your program.
+
+![micro32conceptual](micro32.png)
