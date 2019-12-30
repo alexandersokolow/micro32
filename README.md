@@ -17,6 +17,7 @@ A jumpadr can be also specified, to which the counter will jump, if the alu-out 
 
 To run a program, one must create a file called "bootloader" which may consist only of 32-bit-codes, meaning every line shall 
 contain exactly 32 characters of either 0 or 1  
+you can also add empty lines (without any trailing space characters) or comments starting with # to your program
 The bits specified in those 32 characters have the following effects (order from left to right) ..  
 2 bit: ALU (arithmetic operation)  
 2 bit: SHIFT (left/right shift operation)  
