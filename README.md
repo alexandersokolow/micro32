@@ -28,7 +28,8 @@ The bits specified in those 32 characters have the following effects (order from
 12 bit: JUMPADR (the adr, to which the counter shall jump, if the jumping condition is fulfilled)  
 Look into the micro32.png for more details concerning the operations  
   
-An example-program of multiplication will be provided soon.  
+The bootloader-file in the repository contains an example-program, that initializes reg2=4, reg3=3 and then uses a multiplication
+subroutine to multiply them.  
 
 If the counter reaches 2^12-1, the program will stop, meaning you can jump to this adress to stop your program.
 

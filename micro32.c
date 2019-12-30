@@ -30,7 +30,7 @@
 #define BOUT BSEL4 + 2*BSEL3 + 4*BSEL2 + 8*BSEL1
 #define SIN SSEL4 + 2*SSEL3 + 4*SSEL2 + 8*SSEL1
 
-#define JUMPADR command & 4095 
+#define JUMPADR (command & 4095)
 
 typedef unsigned int bit32;
 
@@ -81,9 +81,7 @@ int main(int argc, char *argv[]){
         if(MEMMODE==1) mar = aluOUT;
         if(MEMMODE==2) memory[mar] = aluOUT;
 
-        if(counter<=4){
-            printStatus(reg, counter, command);
-        }
+        printStatus(reg, counter, command);
 
         switch(JUMP){
             case 0: counter++;
@@ -109,7 +107,9 @@ void bootLoader(bit32* memory){
     char* line = NULL;
     size_t len = 0;
     while(getline(&line, &len, bootloader)>0){
-        memory[i++] = (bit32) strtol(line, NULL, 2);
+        if(line[0] != '\n' && line[0]!='#'){
+            memory[i++] = (bit32) strtol(line, NULL, 2);
+        }
         line = NULL;
         len = 0;
     }
