@@ -24,9 +24,9 @@ int main(int argc, char *argv[]){
     for(int i = 0; i < 65536; i++) memory[i] = 0;
     
     bit32 reg[256];
-    reg[0] = 0; //first register shall always be 0
-    reg[1] = 1; //second register shall always be 1
-    reg[255] = (bit32) -1; //third register shall always be -1
+    reg[0] = 0;
+    reg[1] = 1;
+    reg[255] = (bit32) -1;
 
     bit32 counter = 0; 
     bit32 command = 0;
@@ -36,6 +36,7 @@ int main(int argc, char *argv[]){
     while(counter < 4095){
     
         int oldCounter = counter;
+
         command = memory[counter];
         if(command==0) break;
 
