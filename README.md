@@ -1,4 +1,5 @@
-# micro32
+![micro32conceptual](micro32.png)  
+
 This is a simulation of a 32-bit van-neumann-architecture microprocessor, as conceptualized in the micro32.png
 
 It has 64 registers, where register 0 is always 0, register 1 is always 1 and register 255 is always -1 (in two's complement).  
@@ -27,5 +28,3 @@ The bits specified in those 32 characters have the following effects (order from
 The bootloader-file in the repository contains an example-program, that initializes reg3=8, reg4=6 and then uses a multiplication subroutine to multiply them.   
 
 if the command 0 is used, the program will exit.
-
-![micro32conceptual](micro32.png)
