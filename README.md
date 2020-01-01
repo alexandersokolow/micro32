@@ -11,11 +11,11 @@ The memory consists of 2^16 addresses, which can be utilized for and modified by
 This can be done, by filling the MBR (memory-buffer-register) and MAR (memory-address-register) and then using the appropriate command (look below) to save the data from the MBR to the MAR-address or conversely load the data from the MAR-address to the MBR.
 
 The JR (jump-register) can be loaded and conditional or nonconditional jumps utilized for jumping to the address contained in it.  
-Also, the current address of the counter can be saved by setting the AMUX. 
+Also, the current address of the counter can be saved by setting the CMUX. 
 
 To run a program, one must create a file called "bootloader" which may consist only of 32-bit-codes, meaning every line shall contain exactly 32 characters of either 0 or 1.  
 3 bit: ALU   
-1 bit: AMUX  
+1 bit: CMUX
 4 bit: CONTROL   
 8 bit: A-SEL   
 8 bit: B-SEL  

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #define ALU ((command >> 29) & 7)
-#define AMUX ((command >> 28) & 1)
+#define CMUX ((command >> 28) & 1)
 #define CON ((command >> 24) & 15)
 #define ASEL ((command >> 16) & 255)
 #define BSEL ((command >> 8) & 255)
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
         command = memory[counter];
         if(command==0) break;
 
-        bit32 aluA = AMUX ? counter : reg[ASEL];
+        bit32 aluA = CMUX ? counter : reg[ASEL];
         bit32 aluB = reg[BSEL];
 
         bit32 aluOUT;
@@ -110,7 +110,7 @@ void printStatus(bit32 *reg, bit32 counter, bit32 command, bit32 mbr, bit32 mar,
     printf("COUNTER: %d\n\n", counter);
 
     printf("COMMAND: \n"); 
-    printf("ALU: %d, AMUX: %d, CON: %d\n",ALU,AMUX,CON);
+    printf("ALU: %d, CMUX: %d, CON: %d\n",ALU,CMUX,CON);
     printf("ASEL: %d, BSEL: %d, SSEL: %d\n", ASEL,BSEL,SSEL);
     printf("\n");
 
