@@ -1,3 +1,6 @@
+// MICRO 32: Van-Neumann-Architecture Processor Simulator
+// Author: Alexander Sokolow
+
 #include <stdio.h>
 #include <stdlib.h>
 
