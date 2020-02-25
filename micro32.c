@@ -73,7 +73,7 @@ int main(int argc, char *argv[]){
             reg[SSEL]=aluOUT;
         }
         
-        //Clock-Phase 4: MEMORY & LOAD-JR & JUMP
+        //Clock-Phase 4: MEMORY & JUMP
         if(MS){
             if(RDWR){
                 MBR = memory[MAR];
