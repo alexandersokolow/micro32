@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define ALUF ((command >> 30) & 3)
 #define ALUN ((command >> 29) & 1)
@@ -30,10 +31,11 @@ int main(int argc, char *argv[]){
     bit32 memory[65536];
     bit32 reg[256];
 
-    for(int i = 0; i < 65536; i++) memory[i] = 0;
-    for(int i = 0; i < 256; i++) reg[i] = 0;
+    memset(memory,0,65536);
+    memset(reg,0,256);
 
     bootLoader(memory);
+
     reg[0] = 0;
     reg[1] = 1;
     reg[255] = (bit32) -1;
